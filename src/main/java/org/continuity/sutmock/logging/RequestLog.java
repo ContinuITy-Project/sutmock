@@ -1,6 +1,7 @@
 package org.continuity.sutmock.logging;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -51,7 +52,11 @@ public class RequestLog {
 		this.executorService = Executors.newFixedThreadPool(numWriters);
 		this.writers = new ArrayList<>(numWriters);
 
-		Paths.get(filePrefix).getParent().toFile().mkdirs();
+		Path dir = Paths.get(filePrefix).getParent();
+
+		if (dir != null) {
+			dir.toFile().mkdirs();
+		}
 
 		for (int i = 0; i < numWriters; i++) {
 			LogWriter writer = new LogWriter(buffer, filePrefix + i + ".log");
