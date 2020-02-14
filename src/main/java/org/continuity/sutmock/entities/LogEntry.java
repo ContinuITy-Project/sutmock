@@ -15,12 +15,18 @@ public class LogEntry {
 
 	private final String sessionId;
 
-	private final HttpServletRequest request;
+	private final String method;
+
+	private final String uri;
+
+	private final String protocol;
 
 	public LogEntry(String sessionId, HttpServletRequest request) {
 		this.timestamp = LocalDateTime.now();
 		this.sessionId = sessionId;
-		this.request = request;
+		this.method = request.getMethod();
+		this.uri = request.getRequestURI();
+		this.protocol = request.getProtocol();
 	}
 
 	public LocalDateTime getTimestamp() {
@@ -31,8 +37,16 @@ public class LogEntry {
 		return sessionId;
 	}
 
-	public HttpServletRequest getRequest() {
-		return request;
+	public String getMethod() {
+		return method;
+	}
+
+	public String getUri() {
+		return uri;
+	}
+
+	public String getProtocol() {
+		return protocol;
 	}
 
 	/**
@@ -40,12 +54,8 @@ public class LogEntry {
 	 */
 	@Override
 	public String toString() {
-		if (request == null) {
-			return sessionId;
-		}
-
-		return new StringBuilder().append(sessionId).append(" - - [").append(timestamp).append("] \"").append(request.getMethod()).append(" ").append(request.getRequestURI()).append(" ")
-				.append(request.getProtocol()).append("\" 200 -").toString();
+		return new StringBuilder().append(sessionId).append(" - - [").append(timestamp).append("] \"").append(method).append(" ").append(uri).append(" ").append(protocol).append("\" 200 -")
+				.toString();
 	}
 
 }
