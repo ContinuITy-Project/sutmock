@@ -24,9 +24,9 @@ public class LogEntry {
 	public LogEntry(String sessionId, HttpServletRequest request) {
 		this.timestamp = LocalDateTime.now();
 		this.sessionId = sessionId;
-		this.method = request.getMethod();
-		this.uri = request.getRequestURI();
-		this.protocol = request.getProtocol();
+		this.method = request == null ? null : request.getMethod();
+		this.uri = request == null ? null : request.getRequestURI();
+		this.protocol = request == null ? null : request.getProtocol();
 	}
 
 	public LocalDateTime getTimestamp() {
