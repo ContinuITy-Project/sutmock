@@ -1,4 +1,6 @@
 # SUT Mock
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3966903.svg)](https://doi.org/10.5281/zenodo.3966903)
+
 Mocks a system under test (SUT) to be used for load testing.
 
 The mock will respond to each request with a status code 200 and log the request except for the cases listed below.
